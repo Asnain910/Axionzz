@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Axionz - Empowering Freshers</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* ------------- Global Styles ------------- */
+* { margin:0; padding:0; box-sizing:border-box; font-family:"Poppins",sans-serif; }
+body { line-height:1.6; scroll-behavior:smooth; color:#333; }
+header { background:#111; color:#fff; padding:15px 20px; position:fixed; width:100%; top:0; z-index:1000; display:flex; justify-content:space-between; align-items:center; }
+header .logo { display:flex; align-items:center; }
+header .logo img { height:40px; margin-right:10px; }
+header h1 { font-size:1.5rem; }
+nav ul { list-style:none; display:flex; }
+nav ul li { margin-left:20px; }
+nav ul li a { color:#fff; text-decoration:none; font-weight:500; transition:color 0.3s; }
+nav ul li a:hover { color:#00adb5; }
+.hamburger { display:none; flex-direction:column; cursor:pointer; }
+.hamburger div { width:25px; height:3px; background:white; margin:4px; transition:0.3s; }
+section { min-height:100vh; padding:100px 20px; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; }
+#home { background: linear-gradient(to right, #0f2027, #203a43, #2c5364); color:white; }
+#home h2 { font-size:2.5rem; margin-bottom:10px; }
+#home p { font-size:1.2rem; margin-bottom:20px; }
+#home img { max-width:80%; border-radius:10px; margin-bottom:20px; }
+#home button { padding:10px 20px; border:none; background:#00adb5; color:white; border-radius:5px; cursor:pointer; }
+#home button:hover { background:#007d82; }
+
+h2.section-title { font-size:2rem; margin-bottom:15px; color:#111; }
+
+.card-container { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; margin-top:20px; }
+.card { background:white; padding:20px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,0.1); width:250px; }
+.card img { width:100%; border-radius:8px; margin-bottom:10px; }
+.card h3 { margin-bottom:10px; color:#00adb5; }
+
+#about img,#why img,#support img,#testimonials img,#blog img { border-radius:10px; margin-bottom:20px; max-width:100%; }
+
+#about p,#why p,#support p,#testimonials p,#blog p { max-width:700px; margin-bottom:20px; }
+
+.progress { background:#ddd; border-radius:20px; margin:10px 0; height:20px; width:80%; }
+.progress-bar { height:100%; border-radius:20px; text-align:right; padding-right:10px; color:white; font-size:0.8rem; }
+.comm { width:31%; background:#00adb5; }
+.plan { width:12%; background:#007d82; }
+.learn { width:35%; background:#ff5722; }
+.prog { width:22%; background:#3f51b5; }
+
+ul.features { list-style:none; margin-top:20px; }
+ul.features li { margin:10px 0; }
+
+.testimonial { background:#f4f4f4; padding:20px; border-radius:8px; width:280px; margin:10px; }
+
+.blog-post { background:white; padding:20px; border-radius:8px; width:280px; box-shadow:0 4px 6px rgba(0,0,0,0.1); margin:10px; }
+
+form { max-width:400px; width:100%; background:white; padding:20px; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+form input,form textarea,form button { width:100%; margin-bottom:15px; padding:10px; border:1px solid #ccc; border-radius:5px; font-size:1rem; }
+form button { background:#00adb5; color:white; font-weight:bold; cursor:pointer; border:none; }
+form button:hover { background:#007d82; }
+
+footer { background:#111; color:white; text-align:center; padding:20px; }
+
+@media(max-width:768px){
+  nav ul { display:none; flex-direction:column; background:#111; position:absolute; top:60px; right:0; width:200px; padding:20px; }
+  nav ul.active { display:flex; }
+  .hamburger { display:flex; }
+  section { padding:80px 15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="axionz.jpg.png" alt="Axionz Logo">
+    <h1>Axionz</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#why">Why Choose Us</a></li>
+      <li><a href="#support">Why Trust us</a></li>
+      
+    </ul>
+  </nav>
+  <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+</header>
+
+<!-- Home -->
+<section id="home" style="display:flex;align-items:center;justify-content:center;padding:100px 20px; gap:50px;">
+  <!-- Text Content -->
+  <div class="home-text">
+    <h2 id="typed-text"></h2>
+    <p>
+    From envisioning digital success to seamless projects, Axionz builds, optimizes, 
+    and empowers your career with cutting-edge training and solutions.
+  </p>
+  <p>
+    At Axionz, we believe in bridging the gap between innovation and real-world needs. 
+    Our mission is to empower students, professionals, and businesses with hands-on 
+    learning, modern IT solutions, and scalable technologies. By combining creativity, 
+    expertise, and dedication, we help you transform ideas into impactful outcomes 
+    that shape the future of technology.
+  </p>
+  </div>
+  <!-- Banner Image -->
+  
+</section>
+
+<!-- JavaScript for typing animation -->
+<script>
+const text = "Empower | Your Trusted IT Solutions Partner";
+const typedText = document.getElementById("typed-text");
+let index = 0;
+let forward = true;
+
+function typeAnimation() {
+  if(forward) {
+    typedText.textContent = text.slice(0, index + 1);
+    index++;
+    if(index === text.length) forward = false;
+  } else {
+    typedText.textContent = text.slice(0, index - 1);
+    index--;
+    if(index === 0) forward = true;
+  }
+}
+setInterval(typeAnimation, 120); // Adjust speed here
+</script>
+
+
+<section id="services" style="padding:80px 20px; background:#f5f5f5;">
+  <h2 class="section-title" style="text-align:center; margin-bottom:50px;">Our Services</h2>
+  <div class="card-container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap:40px; justify-items:center;">
+    
+    
+    <div class="card animate-card"><img src="software.png" alt="Software Solutions"><h3>Software Solutions</h3><p>Custom software development tailored to business needs and workflows.</p></div>
+    <div class="card animate-card"><img src="Web.png" alt="Web Development"><h3>Web Development</h3><p>Build modern, responsive websites with expert guidance.</p></div>
+
+    <div class="card animate-card"><img src="cloud.png" alt="Google Cloud"><h3>Google Cloud Training</h3><p>Hands-on Google Cloud training and mentorship for freshers.</p></div>
+    <div class="card animate-card"><img src="cloudservices.png" alt="Cloud Services"><h3>Cloud Services</h3><p>Advanced cloud solutions to optimize infrastructure and innovation.</p></div>
+    <div class="card animate-card"><img src="Data.png" alt="Data Analysis"><h3>Data Analysis</h3><p>Analyze business data to make informed and strategic decisions.</p></div>
+    <div class="card animate-card"><img src="aiml.png" alt="AI/ML"><h3>AI & ML Solutions</h3><p>Implement AI/ML models to automate processes and extract insights.</p></div>
+
+  </div>
+</section>
+
+<style>
+.card {
+  max-width:500px;
+  width:100%;
+  padding:30px;
+  background:white;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  border-radius:15px;
+  text-align:center;
+  transform: translateY(50px) scale(0.9);
+  opacity:0;
+  transition: all 0.8s ease;
+}
+
+.card img {
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+.card h3 {
+  font-size:1.8rem;
+  margin-bottom:15px;
+  color:#00adb5;
+}
+
+.card p {
+  font-size:1rem;
+  color:#333;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow:0 12px 30px rgba(0,0,0,0.3);
+}
+
+/* Scroll animation */
+.animate-card.visible {
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+/* Staggered animation delay */
+.animate-card:nth-child(1) { transition-delay: 0.1s; }
+.animate-card:nth-child(2) { transition-delay: 0.1s; }
+.animate-card:nth-child(3) { transition-delay: 0.1s; }
+.animate-card:nth-child(4) { transition-delay: 0.1s; }
+.animate-card:nth-child(5) { transition-delay: 0.1s; }
+.animate-card:nth-child(6) { transition-delay: 0.1s; }
+</style>
+
+<script>
+// Enhanced scroll animation
+const cards = document.querySelectorAll('.animate-card');
+
+function revealCards() {
+  const windowHeight = window.innerHeight;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < windowHeight - 100) {
+      card.classList.add('visible');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
+</script>
+
+<style>
+/* Card Styling */
+.card {
+  max-width:500px;
+  width:100%;
+  padding:30px;
+  background:white;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  border-radius:15px;
+  text-align:center;
+  transition: transform 0.8s ease, box-shadow 0.4s ease, opacity 0.8s ease;
+  opacity: 0; /* For fade-in animation */
+}
+
+.card img {
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+.card h3 {
+  font-size:1.8rem;
+  margin-bottom:15px;
+  color:#00adb5;
+}
+
+.card p {
+  font-size:1rem;
+  color:#333;
+}
+
+/* Hover animation */
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow:0 12px 30px rgba(0,0,0,0.3);
+}
+
+/* Fade-up animation on scroll */
+.animate-card {
+  opacity:0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
+}
+
+.animate-card.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+// Scroll Animation: Fade-up on scroll
+const cards = document.querySelectorAll('.animate-card');
+
+function revealCards() {
+  const windowHeight = window.innerHeight;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < windowHeight - 100) {
+      card.classList.add('visible');
+    }
+  });
+}
+
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
+</script>
+
+
+
+
+
+<!-- About -->
+<section id="about" style="padding:80px 20px; background:#fff; text-align:center; position:relative; overflow:hidden;">
+  <h2 class="section-title" style="margin-bottom:30px; font-size:2.5rem; color:#060000; opacity:0; transform:translateY(30px); transition:all 0.8s ease;">About Us</h2>
+  <h2 class="section-title" style="text-align:center; margin-bottom:50px;">About Us</h2>
+  <div class="about-container" style="max-width:900px; margin:0 auto;">
+    <img src="back.png" alt="About Axionz" class="about-img">
+    
+   <div class="about-text">
+  <ul>
+    <li><strong>Providing students and businesses with quality IT services is our passion.</strong></li>
+    <li><strong>Transforming ideas into impactful solutions through innovative web, app, and cloud services.</strong></li>
+    <li><strong>A team of dedicated professionals with a forward-thinking approach.</strong></li>
+    <li><strong>Committed to bridging the gap between technology and real-world challenges.</strong></li>
+    <li><strong>Delivering tailored software solutions for diverse needs.</strong></li>
+    <li><strong>Empowering individuals through hands-on training, career guidance, and mentorship.</strong></li>
+    <li><strong>Focusing on innovation, scalability, and excellence in all projects.</strong></li>
+    <li><strong>Striving to be the trusted partner for students, startups, and enterprises in accelerating their digital journey.</strong></li>
+  </ul>
+</div>
+
+
+    
+    <div class="skills">
+      <div class="progress">
+        <div class="progress-bar comm" data-percent="90">Communication</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar plan" data-percent="95">Planning</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar learn" data-percent="99">Learning</div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar prog" data-percent="98">Programming</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Image Animation */
+.about-img {
+  width:100%;
+  max-width:500px;
+  border-radius:20px;
+  margin:20px auto;
+  display:block;
+  opacity:0;
+  transform:scale(0.9);
+  transition:all 1s ease;
+  box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Text Animation */
+.about-text {
+  font-size:1.2rem;
+  margin:30px 0;
+  line-height:1.8;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 1s ease 0.3s;
+}
+
+/* Progress Bar Container */
+.progress {
+  width:100%;
+  background:#eee;
+  border-radius:25px;
+  margin:15px 0;
+  height:35px;
+  overflow:hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Animated Bars */
+.progress-bar {
+  height:100%;
+  line-height:35px;
+  color:#fff;
+  text-align:left;
+  padding-left:15px;
+  font-weight:bold;
+  width:0;
+  border-radius:25px;
+  transition: width 2s ease;
+}
+
+.comm { background: linear-gradient(45deg, #ff6b6b, #ff8e53); }
+.plan { background: linear-gradient(45deg, #36d1dc, #5b86e5); }
+.learn { background: linear-gradient(45deg, #56ab2f, #a8e063); }
+.prog { background: linear-gradient(45deg, #f7971e, #ffd200); }
+
+/* Visible animations */
+.section-title.visible, 
+.about-text.visible, 
+.about-img.visible {
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+</style>
+
+<script>
+// Animate section elements on scroll
+function revealAbout() {
+  const section = document.querySelector('#about');
+  const title = section.querySelector('.section-title');
+  const img = section.querySelector('.about-img');
+  const text = section.querySelector('.about-text');
+  const bars = section.querySelectorAll('.progress-bar');
+
+  const windowHeight = window.innerHeight;
+  const sectionTop = section.getBoundingClientRect().top;
+
+  if(sectionTop < windowHeight - 100) {
+    title.classList.add('visible');
+    img.classList.add('visible');
+    text.classList.add('visible');
+    
+    // Animate bars with width fill
+    bars.forEach(bar => {
+      const percent = bar.getAttribute('data-percent');
+      bar.style.width = percent + "%";
+    });
+  }
+}
+
+window.addEventListener('scroll', revealAbout);
+window.addEventListener('load', revealAbout);
+</script>
+
+
+<!-- Why Choose Us -->
+<section id="why" style="padding:80px 20px; background:#f9f9f9;">
+  <h2 class="section-title">Why Choose Us?</h2>
+
+  <div class="why-wrapper">
+    <!-- Left Side - Image Card -->
+    <div class="why-image-card">
+      <img src="softwareSolution.png" alt="Why Choose Axionz">
+    </div>
+
+    <!-- Right Side - Content Card -->
+    <div class="why-card">
+      <div class="why-content">
+        <p class="why-text">Empowering Your Success With Tailored Tech Solutions</p>
+        <ul class="features">
+          <li>✔ Expertise in Web, App, and Cloud Solutions</li>
+          <li>✔ Customized Development Programs</li>
+          <li>✔ SEO & Visibility Strategies</li>
+          <li>✔ Robust Database Management</li>
+          <li>✔ Dedicated Support & Maintenance</li>
+          <li>✔ Proven Track Record</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Section Title */
+#why .section-title {
+  text-align:center;
+  font-size:2.5rem;
+  margin-bottom:40px;
+  color:#00adb5;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.8s ease;
+}
+
+/* Wrapper to hold image + card side by side */
+.why-wrapper {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:40px;
+  max-width:1200px;
+  margin:0 auto;
+  flex-wrap:wrap;
+}
+
+/* Image Card */
+.why-image-card {
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  max-width:320px;
+  opacity:0;
+  transform:translateY(50px) scale(0.9);
+  transition:all 1s ease;
+}
+
+.why-image-card img {
+  width:100%;
+  border-radius:15px;
+  display:block;
+  transition:transform 0.6s ease;
+}
+
+.why-image-card:hover img {
+  transform:scale(1.05) rotate(2deg);
+}
+
+/* Content Card */
+.why-card {
+  flex:1;
+  background:#fff;
+  border-radius:20px;
+  padding:40px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 1s ease;
+}
+
+.why-text {
+  font-size:1.3rem;
+  font-weight:600;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateX(30px);
+  transition:all 1s ease 0.6s;
+}
+
+/* Features */
+.features {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.features li {
+  font-size:1.1rem;
+  margin:12px 0;
+  padding:10px 15px;
+  border-left:4px solid #00adb5;
+  background:rgba(0,173,181,0.08);
+  border-radius:8px;
+  transform:translateX(-30px);
+  opacity:0;
+  transition:all 0.6s ease;
+}
+.features li:nth-child(1){transition-delay:0.8s;}
+.features li:nth-child(2){transition-delay:1s;}
+.features li:nth-child(3){transition-delay:1.2s;}
+.features li:nth-child(4){transition-delay:1.4s;}
+.features li:nth-child(5){transition-delay:1.6s;}
+.features li:nth-child(6){transition-delay:1.8s;}
+
+.features li:hover {
+  background:rgba(0,173,181,0.15);
+  transform:scale(1.05);
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  cursor:pointer;
+}
+
+/* Visible States */
+#why.visible .section-title,
+#why.visible .why-card,
+#why.visible .why-image-card {
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+#why.visible .why-text,
+#why.visible .features li {
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .why-wrapper {
+    flex-direction:column;
+    align-items:center;
+  }
+  .why-card {
+    margin-top:25px;
+  }
+}
+</style>
+
+<script>
+function revealWhy() {
+  const section = document.querySelector('#why');
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if(rect.top < windowHeight - 100){
+    section.classList.add('visible');
+  }
+}
+window.addEventListener('scroll', revealWhy);
+window.addEventListener('load', revealWhy);
+</script>
+
+
+<!-- Support -->
+<section id="support" style="padding:80px 20px; background:#f0f9ff;">
+  <h2 class="section-title">Why Trust Us?</h2>
+
+  <div class="support-wrapper">
+    <!-- Left Side - Image Card -->
+    <div class="support-image-card">
+      <img src="chooseus.png" alt="Support Image">
+    </div>
+
+    <!-- Right Side - Content Card -->
+    <div class="support-card">
+      <p class="support-text">Your Success is Our Responsibility</p>
+      <ul class="features">
+        <li>✔ Skilled team with industry expertise</li>
+        <li>✔ Personalized approach to each project</li>
+        <li>✔ Transparent communication and reporting</li>
+        <li>✔ Commitment to timely delivery</li>
+        <li>✔ Continuous support and post-launch care</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Section Title */
+#support .section-title {
+  text-align:center;
+  font-size:2.5rem;
+  margin-bottom:40px;
+  color:#0077b6;
+  opacity:0;
+  transform:translateY(30px);
+  transition:all 0.8s ease;
+}
+
+/* Wrapper Layout */
+.support-wrapper {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:40px;
+  max-width:1200px;
+  margin:0 auto;
+  flex-wrap:wrap;
+}
+
+/* Image Card */
+.support-image-card {
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  max-width:350px;
+  opacity:0;
+  transform:translateY(50px) scale(0.9);
+  transition:all 1s ease;
+}
+
+.support-image-card img {
+  width:100%;
+  border-radius:15px;
+  display:block;
+  transition:transform 0.6s ease;
+}
+
+.support-image-card:hover img {
+  transform:scale(1.05) rotate(-2deg);
+}
+
+/* Content Card */
+.support-card {
+  flex:1;
+  background:#fff;
+  border-radius:20px;
+  padding:40px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+  opacity:0;
+  transform:translateY(50px);
+  transition:all 1s ease;
+}
+
+.support-text {
+  font-size:1.3rem;
+  font-weight:600;
+  margin-bottom:20px;
+  opacity:0;
+  transform:translateX(30px);
+  transition:all 1s ease 0.6s;
+}
+
+/* Features List */
+.features {
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.features li {
+  font-size:1.1rem;
+  margin:12px 0;
+  padding:10px 15px;
+  border-left:4px solid #0077b6;
+  background:rgba(0,119,182,0.08);
+  border-radius:8px;
+  transform:translateX(-30px);
+  opacity:0;
+  transition:all 0.6s ease;
+}
+.features li:nth-child(1){transition-delay:0.8s;}
+.features li:nth-child(2){transition-delay:1s;}
+.features li:nth-child(3){transition-delay:1.2s;}
+.features li:nth-child(4){transition-delay:1.4s;}
+.features li:nth-child(5){transition-delay:1.6s;}
+
+.features li:hover {
+  background:rgba(0,119,182,0.15);
+  transform:scale(1.05);
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  cursor:pointer;
+}
+
+/* Visible States */
+#support.visible .section-title,
+#support.visible .support-card,
+#support.visible .support-image-card {
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+#support.visible .support-text,
+#support.visible .features li {
+  opacity:1;
+  transform:translateX(0);
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .support-wrapper {
+    flex-direction:column;
+    align-items:center;
+  }
+  .support-card {
+    margin-top:25px;
+  }
+}
+</style>
+
+<script>
+// Reveal animation when section comes into view
+function revealSupport() {
+  const section = document.querySelector('#support');
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+
+  if(rect.top < windowHeight - 100){
+    section.classList.add('visible');
+  }
+}
+window.addEventListener('scroll', revealSupport);
+window.addEventListener('load', revealSupport);
+</script>
+
+
+</section>
+
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Company Info -->
+    <div class="footer-col">
+      <h3>Axionz</h3>
+      <p>
+        Transforming ideas into impactful digital solutions through innovative
+        web, app, AI/ML, and cloud services. Delivering excellence, always.
+      </p>
+      <p>Email: <a href="mailto:support@axionz.com">support@axionz.com</a></p>
+      <div class="social-icons">
+         <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Our Services</a></li>
+        <li><a href="#why">Why Choose Us</a></li>
+        <li><a href="#support">Support</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="footer-col">
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Cloud Solutions</a></li>
+        <li><a href="#">AI & ML</a></li>
+        <li><a href="#">Data Analytics</a></li>
+        <li><a href="#">Software Consulting</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="footer-col">
+      <h4>Stay Updated</h4>
+      <p>Subscribe to our newsletter for the latest updates.</p>
+      
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Axionz. All rights reserved. | Designed with ❤️ by Axionz Team</p>
+  </div>
+</footer>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+
+<style>
+.footer {
+  background:#0d1b2a;
+  color:#fff;
+  padding:60px 20px 20px;
+  font-family:'Segoe UI', sans-serif;
+}
+
+.footer-container {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  gap:40px;
+}
+
+.footer-col {
+  flex:1;
+  min-width:220px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  color:#00adb5;
+  margin-bottom:20px;
+}
+
+.footer-col p {
+  font-size:0.95rem;
+  line-height:1.6;
+  color:#dbe4ee;
+}
+
+.footer-col ul {
+  list-style:none;
+  padding:0;
+}
+
+.footer-col ul li {
+  margin:10px 0;
+}
+
+.footer-col ul li a {
+  text-decoration:none;
+  color:#dbe4ee;
+  transition:color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+  color:#00adb5;
+}
+
+/* Social Icons */
+.social-icons {
+  margin-top:15px;
+}
+.social-icons a {
+  display:inline-block;
+  margin-right:10px;
+  font-size:1.2rem;
+  color:#fff;
+  background:#00adb5;
+  padding:8px 10px;
+  border-radius:50%;
+  transition:all 0.3s ease;
+}
+.social-icons a:hover {
+  background:#fff;
+  color:#00adb5;
+  transform:scale(1.1);
+}
+
+/* Newsletter */
+.newsletter-form {
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+.newsletter-form input {
+  padding:10px;
+  flex:1;
+  border:none;
+  border-radius:5px;
+}
+.newsletter-form button {
+  background:#00adb5;
+  border:none;
+  padding:10px 20px;
+  color:#fff;
+  border-radius:5px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+}
+.newsletter-form button:hover {
+  background:#028890;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  border-top:1px solid rgba(255,255,255,0.2);
+  margin-top:40px;
+  text-align:center;
+  padding-top:20px;
+  font-size:0.9rem;
+  color:#adb5bd;
+}
+
+/* Responsive */
+@media (max-width:900px) {
+  .footer-container {
+    flex-direction:column;
+    text-align:center;
+  }
+  .newsletter-form {
+    flex-direction:column;
+  }
+}
+</style>
+
+
+<!-- JavaScript -->
+<script>
+  // Hamburger toggle
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.querySelector("nav ul");
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+  document.querySelectorAll("nav ul li a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("active");
+    });
+  });
+
+  // Contact form alert
+  const form = document.getElementById("contactForm");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert("Thank you for contacting Axionz! We'll get back soon.");
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
+
